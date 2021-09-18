@@ -1,0 +1,9 @@
+
+[build]
+cmd = "go build -o ./tmp/main main.go"
+#exclude_dir = [ "dist", "docs" ]
+include_ext = ["go", "tpl", "tmpl", "html", "env"]
+exclude_regex = ["_test.go"]
+delay = 1000 # ms
+bin = "tmp/main"
+send_interrupt = true
