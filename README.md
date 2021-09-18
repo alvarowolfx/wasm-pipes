@@ -11,8 +11,9 @@ The idea behind this project is to allows developers to create easily customizab
 
 ## Build/Install
 
+You need go installed to build this project.
 ```
-> go install main.go
+> go install ./ # or make install
 > wasm-pipes
 ```
 
