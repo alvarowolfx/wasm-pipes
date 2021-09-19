@@ -2,6 +2,7 @@ package engine
 
 import (
 	"context"
+	"time"
 
 	"github.com/apex/log"
 	"github.com/wasmerio/wasmer-go/wasmer"
@@ -97,6 +98,7 @@ func (e *engine) listenMessages() {
 }
 
 func (e *engine) runWithMsg(msg *pubsub.Message) error {
+	start := time.Now()
 	var err error
 	var instance *wasmer.Instance
 	importObject := wasmer.NewImportObject()
@@ -131,6 +133,7 @@ func (e *engine) runWithMsg(msg *pubsub.Message) error {
 	}
 
 	_, err = run()
+	log.Infof("execution time: %v", time.Since(start))
 	return err
 }
 
