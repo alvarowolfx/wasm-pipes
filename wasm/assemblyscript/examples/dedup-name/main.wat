@@ -30,10 +30,10 @@
  (global $node_modules/assemblyscript-json/assembly/JSON/_JSON.decoder (mut i32) (i32.const 0))
  (global $~lib/util/string/__fixmulShift (mut i64) (i64.const 0))
  (global $node_modules/assemblyscript-json/assembly/JSON/NULL (mut i32) (i32.const 0))
- (global $~lib/memory/__stack_pointer (mut i32) (i32.const 20372))
+ (global $~lib/memory/__stack_pointer (mut i32) (i32.const 20356))
  (memory $0 1)
  (data (i32.const 2140) "<")
- (data (i32.const 2152) "\01\00\00\00 \00\00\00R\00e\00c\00e\00i\00v\00e\00d\00 \00e\00v\00e\00n\00t\00:\00 ")
+ (data (i32.const 2152) "\01\00\00\00 \00\00\00r\00e\00c\00e\00i\00v\00e\00d\00 \00e\00v\00e\00n\00t\00:\00 ")
  (data (i32.const 2204) "\1c")
  (data (i32.const 2216) "\01")
  (data (i32.const 2236) "\1c")
@@ -87,21 +87,21 @@
  (data (i32.const 3176) "\01\00\00\00\0c\00\00\00n\00a\00m\00e\00:\00 ")
  (data (i32.const 3196) ",")
  (data (i32.const 3208) "\01\00\00\00\10\00\00\00l\00a\00s\00t\00N\00a\00m\00e")
- (data (i32.const 3388) "\\")
- (data (i32.const 3400) "\01\00\00\00L\00\00\00n\00a\00m\00e\00 \00v\00a\00l\00u\00e\00 \00c\00h\00a\00n\00g\00e\00d\00,\00 \00s\00e\00t\00t\00i\00n\00g\00 \00n\00e\00w\00 \00v\00a\00l\00u\00e\00.")
- (data (i32.const 3484) "<")
- (data (i32.const 3496) "\01\00\00\00(\00\00\00s\00e\00n\00d\00i\00n\00g\00 \00n\00a\00m\00e\00 \00f\00o\00r\00w\00a\00r\00d")
- (data (i32.const 3548) "\\")
- (data (i32.const 3560) "\01\00\00\00D\00\00\00r\00e\00p\00e\00a\00t\00e\00d\00 \00n\00a\00m\00e\00,\00 \00n\00o\00t\00 \00s\00e\00n\00d\00i\00n\00g\00 \00f\00o\00r\00w\00a\00r\00d")
+ (data (i32.const 3388) "l")
+ (data (i32.const 3400) "\01\00\00\00\\\00\00\00n\00a\00m\00e\00 \00v\00a\00l\00u\00e\00 \00c\00h\00a\00n\00g\00e\00d\00,\00 \00s\00e\00t\00t\00i\00n\00g\00 \00n\00e\00w\00 \00v\00a\00l\00u\00e\00 \00o\00n\00 \00c\00a\00c\00h\00e")
+ (data (i32.const 3500) "<")
+ (data (i32.const 3512) "\01\00\00\00(\00\00\00s\00e\00n\00d\00i\00n\00g\00 \00n\00a\00m\00e\00 \00f\00o\00r\00w\00a\00r\00d")
+ (data (i32.const 3564) "L")
+ (data (i32.const 3576) "\01\00\00\004\00\00\00r\00e\00p\00e\00a\00t\00e\00d\00 \00n\00a\00m\00e\00,\00 \00n\00o\00t\00 \00s\00e\00n\00d\00i\00n\00g")
  (data (i32.const 3644) "<")
- (data (i32.const 3656) "\01\00\00\00,\00\00\00N\00o\00 \00n\00a\00m\00e\00 \00f\00o\00u\00n\00d\00 \00i\00n\00 \00e\00v\00e\00n\00t")
- (data (i32.const 3708) "l")
- (data (i32.const 3720) "\01\00\00\00R\00\00\00N\00o\00 \00J\00S\00O\00N\00 \00o\00b\00j\00e\00c\00t\00 \00f\00o\00u\00n\00d\00,\00 \00n\00o\00t\00 \00s\00e\00n\00d\00i\00n\00g\00 \00f\00o\00r\00w\00a\00r\00d")
- (data (i32.const 3824) "\14\00\00\00 \00\00\00\00\00\00\00 ")
- (data (i32.const 3856) "\04\00\00\00 \00\00\00\00\00\00\00\10A\82\00\00\00\00\00A\00\00\00\02\00\00\00\00\00\00\00\08\00\00\00 \00\00\00\00\00\00\00\02A")
- (data (i32.const 3928) "\04\00\00\00\02A")
- (data (i32.const 3944) "\04\00\00\00 \00\00\00\04\00\00\00 \00\00\00\11\00\00\00 \00\00\00\04\00\00\00 \00\00\00\04\00\00\00 \00\00\00\04")
- (export "run" (func $examples/filter/run))
+ (data (i32.const 3656) "\01\00\00\00,\00\00\00n\00o\00 \00n\00a\00m\00e\00 \00f\00o\00u\00n\00d\00 \00i\00n\00 \00e\00v\00e\00n\00t")
+ (data (i32.const 3708) "\\")
+ (data (i32.const 3720) "\01\00\00\00B\00\00\00n\00o\00 \00J\00S\00O\00N\00 \00o\00b\00j\00e\00c\00t\00 \00f\00o\00u\00n\00d\00,\00 \00n\00o\00t\00 \00s\00e\00n\00d\00i\00n\00g")
+ (data (i32.const 3808) "\14\00\00\00 \00\00\00\00\00\00\00 ")
+ (data (i32.const 3840) "\04\00\00\00 \00\00\00\00\00\00\00\10A\82\00\00\00\00\00A\00\00\00\02\00\00\00\00\00\00\00\08\00\00\00 \00\00\00\00\00\00\00\02A")
+ (data (i32.const 3912) "\04\00\00\00\02A")
+ (data (i32.const 3928) "\04\00\00\00 \00\00\00\04\00\00\00 \00\00\00\11\00\00\00 \00\00\00\04\00\00\00 \00\00\00\04\00\00\00 \00\00\00\04")
+ (export "run" (func $examples/dedup-name/main/run))
  (export "memory" (memory $0))
  (start $~start)
  (func $~lib/rt/itcms/Object#set:nextWithColor (param $0 i32) (param $1 i32)
@@ -272,7 +272,7 @@
   else
    local.get $0
    local.tee $1
-   i32.const 3824
+   i32.const 3808
    i32.load
    i32.gt_u
    if
@@ -281,7 +281,7 @@
    local.get $1
    i32.const 3
    i32.shl
-   i32.const 3828
+   i32.const 3812
    i32.add
    i32.load
    i32.const 32
@@ -706,10 +706,10 @@
   if
    unreachable
   end
-  i32.const 20384
+  i32.const 20368
   i32.const 0
   call $~lib/rt/tlsf/Root#set:flMap
-  i32.const 21952
+  i32.const 21936
   i32.const 0
   i32.store
   loop $for-loop|0
@@ -720,7 +720,7 @@
     local.get $1
     i32.const 2
     i32.shl
-    i32.const 20384
+    i32.const 20368
     i32.add
     i32.const 0
     i32.store offset=4
@@ -738,7 +738,7 @@
       i32.add
       i32.const 2
       i32.shl
-      i32.const 20384
+      i32.const 20368
       i32.add
       i32.const 0
       i32.store offset=96
@@ -756,13 +756,13 @@
     br $for-loop|0
    end
   end
-  i32.const 20384
-  i32.const 21956
+  i32.const 20368
+  i32.const 21940
   memory.size
   i32.const 16
   i32.shl
   call $~lib/rt/tlsf/addMemory
-  i32.const 20384
+  i32.const 20368
   global.set $~lib/rt/tlsf/ROOT
  )
  (func $~lib/rt/itcms/step (result i32)
@@ -832,7 +832,7 @@
       local.set $0
       loop $while-continue|0
        local.get $0
-       i32.const 20372
+       i32.const 20356
        i32.lt_u
        if
         local.get $0
@@ -900,7 +900,7 @@
      call $~lib/rt/itcms/Object#get:color
      drop
      local.get $0
-     i32.const 20372
+     i32.const 20356
      i32.lt_u
      if
       local.get $0
@@ -919,7 +919,7 @@
       i32.const 4
       i32.add
       local.tee $1
-      i32.const 20372
+      i32.const 20356
       i32.ge_u
       if
        global.get $~lib/rt/tlsf/ROOT
@@ -2075,7 +2075,7 @@
   i32.sub
   i32.load offset=12
   local.tee $0
-  i32.const 3824
+  i32.const 3808
   i32.load
   i32.le_u
   if
@@ -2090,7 +2090,7 @@
     local.get $0
     i32.const 3
     i32.shl
-    i32.const 3828
+    i32.const 3812
     i32.add
     i32.load offset=4
     local.tee $0
@@ -3896,7 +3896,7 @@
  )
  (func $~stack_check
   global.get $~lib/memory/__stack_pointer
-  i32.const 3988
+  i32.const 3972
   i32.lt_s
   if
    unreachable
@@ -6015,7 +6015,7 @@
   global.set $~lib/memory/__stack_pointer
   local.get $2
  )
- (func $examples/filter/run
+ (func $examples/dedup-name/main/run
   (local $0 i32)
   (local $1 i32)
   (local $2 i32)
@@ -6227,9 +6227,9 @@
     call $~lib/string/String.__eq
     if
      global.get $~lib/memory/__stack_pointer
-     i32.const 3568
+     i32.const 3584
      i32.store offset=4
-     i32.const 3568
+     i32.const 3584
      call $lib/log/println
     else
      global.get $~lib/memory/__stack_pointer
@@ -6279,9 +6279,9 @@
      i32.add
      global.set $~lib/memory/__stack_pointer
      global.get $~lib/memory/__stack_pointer
-     i32.const 3504
+     i32.const 3520
      i32.store offset=4
-     i32.const 3504
+     i32.const 3520
      call $lib/log/println
      global.get $~lib/memory/__stack_pointer
      i32.const 4
@@ -6340,7 +6340,7 @@
   memory.size
   i32.const 16
   i32.shl
-  i32.const 20372
+  i32.const 20356
   i32.sub
   i32.const 1
   i32.shr_u

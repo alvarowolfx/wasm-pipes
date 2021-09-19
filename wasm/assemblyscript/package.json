@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run asbuild:optimized && xxd -i examples/filter.wasm > examples/filter.wasm.h",
-    "asbuild:optimized": "npx asc examples/filter.ts -b examples/filter.wasm -t examples/filter.wat -O3z --noAssert --use abort="
+    "build": "npm run asbuild:optimized",
+    "build-all": "ls ./examples | xargs -I@ echo \"EXAMPLE=@ npm run build\" | sh",
+    "asbuild:optimized": "npx asc examples/$EXAMPLE/main.ts -b examples/$EXAMPLE/main.wasm -t examples/$EXAMPLE/main.wat -O3z --noAssert --use abort="
   },
   "devDependencies": {
     "assemblyscript": "^0.19.16"
