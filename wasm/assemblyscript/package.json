@@ -1,0 +1,18 @@
+{
+  "name": "wasm-pipes-as",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run asbuild:optimized && xxd -i examples/filter.wasm > examples/filter.wasm.h",
+    "asbuild:optimized": "npx asc examples/filter.ts -b examples/filter.wasm -t examples/filter.wat -O3z --noAssert --use abort="
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.19.16"
+  },
+  "author": "Alvaro Viebrantz",
+  "license": "MIT",
+  "dependencies": {
+    "assemblyscript-json": "^1.0.0"
+  }
+}
