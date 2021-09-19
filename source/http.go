@@ -15,10 +15,10 @@ import (
 )
 
 type httpSource struct {
-	path     string
-	port     string
-	eventBus *pubsub.Topic
-	s        *server.Server
+	path   string
+	port   string
+	output *pubsub.Topic
+	s      *server.Server
 }
 
 func NewHTTPSource(deps SourceDeps) (Source, error) {
@@ -32,7 +32,7 @@ func NewHTTPSource(deps SourceDeps) (Source, error) {
 		port = "80"
 	}
 	path := url.Path
-	return &httpSource{port: port, path: path, eventBus: deps.EventBusTopic}, nil
+	return &httpSource{port: port, path: path, output: deps.Output}, nil
 }
 
 func (r *httpSource) Start() {
@@ -51,7 +51,7 @@ func (r *httpSource) Start() {
 				fmt.Fprintln(res, err.Error())
 				return
 			}
-			err = r.eventBus.Send(ctx, &pubsub.Message{
+			err = r.output.Send(ctx, &pubsub.Message{
 				Body:     body,
 				Metadata: metadata,
 			})
@@ -69,7 +69,7 @@ func (r *httpSource) Start() {
 				fmt.Fprintln(res, err.Error())
 				return
 			}
-			err = r.eventBus.Send(ctx, &pubsub.Message{
+			err = r.output.Send(ctx, &pubsub.Message{
 				Body:     body,
 				Metadata: metadata,
 			})
@@ -92,7 +92,7 @@ func (r *httpSource) Start() {
 	}
 }
 
-func (r *httpSource) Stop(ctx context.Context) error {
+func (r *httpSource) Shutdown(ctx context.Context) error {
 	if r.s != nil {
 		return r.s.Shutdown(ctx)
 	}

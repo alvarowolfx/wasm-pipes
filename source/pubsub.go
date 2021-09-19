@@ -9,19 +9,19 @@ import (
 )
 
 type pubsubSource struct {
-	uri      string
-	eventBus *pubsub.Topic
-	sub      *pubsub.Subscription
+	uri    string
+	output *pubsub.Topic
+	input  *pubsub.Subscription
 }
 
 func NewPubsubSource(deps SourceDeps) (Source, error) {
-	return &pubsubSource{uri: deps.URI, eventBus: deps.EventBusTopic}, nil
+	return &pubsubSource{uri: deps.URI, output: deps.Output}, nil
 }
 
 func (r *pubsubSource) Start() {
 	ctx := context.Background()
 	var err error
-	r.sub, err = pubsub.OpenSubscription(ctx, r.uri)
+	r.input, err = pubsub.OpenSubscription(ctx, r.uri)
 	if err != nil {
 		log.Fatalf("err opening pubsub subscription: %v", err)
 	}
@@ -30,13 +30,13 @@ func (r *pubsubSource) Start() {
 }
 
 func (r *pubsubSource) listenMessages() {
-	if r.sub == nil {
+	if r.input == nil {
 		return
 	}
 
 	for {
 		ctx := context.Background()
-		msg, err := r.sub.Receive(ctx)
+		msg, err := r.input.Receive(ctx)
 		if err != nil {
 			log.Errorf("receiving message: %v", err)
 			break
@@ -44,7 +44,7 @@ func (r *pubsubSource) listenMessages() {
 		log.Infof("got message: %q\n", msg.Body)
 
 		go func(msg *pubsub.Message) {
-			serr := r.eventBus.Send(ctx, &pubsub.Message{
+			serr := r.output.Send(ctx, &pubsub.Message{
 				Body:     msg.Body,
 				Metadata: msg.Metadata,
 			})
@@ -58,9 +58,9 @@ func (r *pubsubSource) listenMessages() {
 	}
 }
 
-func (r *pubsubSource) Stop(ctx context.Context) error {
-	if r.sub != nil {
-		return r.sub.Shutdown(ctx)
+func (r *pubsubSource) Shutdown(ctx context.Context) error {
+	if r.input != nil {
+		return r.input.Shutdown(ctx)
 	}
 	return nil
 }

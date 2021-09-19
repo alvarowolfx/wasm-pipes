@@ -10,12 +10,12 @@ import (
 )
 
 type httpSink struct {
-	uri      string
-	eventBus *pubsub.Subscription
+	uri   string
+	input *pubsub.Subscription
 }
 
 func NewHTTPSink(deps SinkDeps) (Sink, error) {
-	return &httpSink{uri: deps.URI, eventBus: deps.EventBusSub}, nil
+	return &httpSink{uri: deps.URI, input: deps.Input}, nil
 }
 
 func (s *httpSink) Start() {
@@ -23,13 +23,13 @@ func (s *httpSink) Start() {
 }
 
 func (s *httpSink) listenMessages() {
-	if s.eventBus == nil {
+	if s.input == nil {
 		return
 	}
 
 	for {
 		ctx := context.Background()
-		msg, err := s.eventBus.Receive(ctx)
+		msg, err := s.input.Receive(ctx)
 		if err != nil {
 			log.Errorf("relaying message to sink: %v", err)
 			break
@@ -56,6 +56,6 @@ func (s *httpSink) listenMessages() {
 	}
 }
 
-func (s *httpSink) Stop(ctx context.Context) error {
+func (s *httpSink) Shutdown(ctx context.Context) error {
 	return nil
 }

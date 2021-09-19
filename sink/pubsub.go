@@ -8,19 +8,19 @@ import (
 )
 
 type pubsubSink struct {
-	uri      string
-	eventBus *pubsub.Subscription
-	topic    *pubsub.Topic
+	uri    string
+	input  *pubsub.Subscription
+	output *pubsub.Topic
 }
 
 func NewPubsubSink(deps SinkDeps) (Sink, error) {
-	return &pubsubSink{uri: deps.URI, eventBus: deps.EventBusSub}, nil
+	return &pubsubSink{uri: deps.URI, input: deps.Input}, nil
 }
 
 func (s *pubsubSink) Start() {
 	ctx := context.Background()
 	var err error
-	s.topic, err = pubsub.OpenTopic(ctx, s.uri)
+	s.output, err = pubsub.OpenTopic(ctx, s.uri)
 	if err != nil {
 		log.Fatalf("err opening pubsub sink topic: %v", err)
 	}
@@ -29,13 +29,13 @@ func (s *pubsubSink) Start() {
 }
 
 func (s *pubsubSink) listenMessages() {
-	if s.topic == nil {
+	if s.input == nil {
 		return
 	}
 
 	for {
 		ctx := context.Background()
-		msg, err := s.eventBus.Receive(ctx)
+		msg, err := s.input.Receive(ctx)
 		if err != nil {
 			log.Errorf("receiving message on sink: %v", err)
 			break
@@ -43,7 +43,7 @@ func (s *pubsubSink) listenMessages() {
 		log.Infof("got message on sink: %q", msg.Body)
 
 		go func(msg *pubsub.Message) {
-			serr := s.topic.Send(ctx, &pubsub.Message{
+			serr := s.output.Send(ctx, &pubsub.Message{
 				Body:     msg.Body,
 				Metadata: msg.Metadata,
 			})
@@ -57,9 +57,9 @@ func (s *pubsubSink) listenMessages() {
 	}
 }
 
-func (s *pubsubSink) Stop(ctx context.Context) error {
-	if s.topic != nil {
-		return s.topic.Shutdown(ctx)
+func (s *pubsubSink) Shutdown(ctx context.Context) error {
+	if s.output != nil {
+		return s.output.Shutdown(ctx)
 	}
 	return nil
 }

@@ -9,12 +9,12 @@ import (
 
 type Sink interface {
 	Start()
-	Stop(context.Context) error
+	Shutdown(context.Context) error
 }
 
 type SinkDeps struct {
-	URI         string
-	EventBusSub *pubsub.Subscription
+	URI   string
+	Input *pubsub.Subscription
 }
 
 func NewSink(deps SinkDeps) (Sink, error) {

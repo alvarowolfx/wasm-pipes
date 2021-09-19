@@ -9,12 +9,12 @@ import (
 
 type Source interface {
 	Start()
-	Stop(context.Context) error
+	Shutdown(context.Context) error
 }
 
 type SourceDeps struct {
-	URI           string
-	EventBusTopic *pubsub.Topic
+	URI    string
+	Output *pubsub.Topic
 }
 
 func NewSource(deps SourceDeps) (Source, error) {
