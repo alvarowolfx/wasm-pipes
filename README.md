@@ -107,3 +107,4 @@ Configurable by the env variable `SINK_URI`.
 
 - About Data Ping-Pong - https://vectorized.io/blog/wasm-architecture/
 - Go Cloud Development Kit - https://gocloud.dev/
+- WASM Engine - https://github.com/wasmerio/wasmer-go
