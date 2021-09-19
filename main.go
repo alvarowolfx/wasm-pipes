@@ -33,30 +33,44 @@ func main() {
 	cacheStore, err := infra.NewCache("mem://")
 	checkErr("could not create engine cache", err)
 
-	wasmBucket, err := blob.OpenBucket(ctx, cfg.WasmBucketURI)
-	checkErr("could not open engine bucket", err)
-	defer func() {
-		cerr := wasmBucket.Close()
-		if cerr != nil {
-			log.Errorf("could not close engine bucket: %v", cerr)
-		}
-	}()
+	var wasmBucket *blob.Bucket
+	if cfg.WasmEnabled {
+		wasmBucket, err = blob.OpenBucket(ctx, cfg.WasmBucketURI)
+		checkErr("could not open engine bucket", err)
+		defer func() {
+			cerr := wasmBucket.Close()
+			if cerr != nil {
+				log.Errorf("could not close engine bucket: %v", cerr)
+			}
+		}()
+	}
+
+	var engineInputSub *pubsub.Subscription
+	var engineOutputTopic *pubsub.Topic
+	var sinkInputSub *pubsub.Subscription
 
 	sourceURI := "mem://sourceTopic"
 	sourceOutputTopic, err := pubsub.OpenTopic(ctx, sourceURI)
 	checkErr("could not create internal source topic", err)
 	defer handleStoppable(sourceOutputTopic)
-	sourceOutputSub, err := pubsub.OpenSubscription(ctx, sourceURI)
-	checkErr("could not create internal source subscription", err)
-	defer handleStoppable(sourceOutputSub)
+	if cfg.WasmEnabled {
+		engineInputSub, err = pubsub.OpenSubscription(ctx, sourceURI)
+		checkErr("could not create internal source subscription", err)
+		defer handleStoppable(engineInputSub)
 
-	engineURI := "mem://engineTopic"
-	engineOutputTopic, err := pubsub.OpenTopic(ctx, engineURI)
-	checkErr("could not create internal engine topic", err)
-	defer handleStoppable(engineOutputTopic)
-	engineOutputSub, err := pubsub.OpenSubscription(ctx, engineURI)
-	checkErr("could not create internal engine subscription", err)
-	defer handleStoppable(engineOutputSub)
+		engineURI := "mem://engineTopic"
+		engineOutputTopic, err = pubsub.OpenTopic(ctx, engineURI)
+		checkErr("could not create internal engine topic", err)
+		defer handleStoppable(engineOutputTopic)
+
+		sinkInputSub, err = pubsub.OpenSubscription(ctx, engineURI)
+		checkErr("could not create internal engine subscription", err)
+		defer handleStoppable(sinkInputSub)
+	} else {
+		sinkInputSub, err = pubsub.OpenSubscription(ctx, sourceURI)
+		checkErr("could not create internal sink subscription", err)
+		defer handleStoppable(sinkInputSub)
+	}
 
 	src, err := source.NewSource(source.SourceDeps{
 		URI:    cfg.SourceURI,
@@ -66,20 +80,22 @@ func main() {
 	go src.Start()
 	defer handleStoppable(src)
 
-	eng, err := engine.NewEngine(&engine.EngineDeps{
-		Filename: cfg.WasmFilename,
-		Bucket:   wasmBucket,
-		Cache:    cacheStore,
-		Input:    sourceOutputSub,
-		Output:   engineOutputTopic,
-	})
-	checkErr("could not create wasm engine", err)
-	go eng.Start()
-	defer handleStoppable(eng)
+	if cfg.WasmEnabled {
+		eng, err := engine.NewEngine(&engine.EngineDeps{
+			Filename: cfg.WasmFilename,
+			Bucket:   wasmBucket,
+			Cache:    cacheStore,
+			Input:    engineInputSub,
+			Output:   engineOutputTopic,
+		})
+		checkErr("could not create wasm engine", err)
+		go eng.Start()
+		defer handleStoppable(eng)
+	}
 
 	sk, err := sink.NewSink(sink.SinkDeps{
 		URI:   cfg.SinkURI,
-		Input: engineOutputSub,
+		Input: sinkInputSub,
 	})
 	checkErr("could not create sink", err)
 	go sk.Start()
