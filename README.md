@@ -1,5 +1,7 @@
 # WASM Pipes
 
+<img src="./.images/logo.png" width="64" height="64" />
+
 🚧**THIS IS A WORK IN PROGRESS - DON'T TRY IN PRODUCTION**🚧
 
 A lot of work on stream processing is doing some "data ping-pong", which is to relay data from one source to another, doing some small transformations or filtering.
@@ -7,7 +9,9 @@ A lot of work on stream processing is doing some "data ping-pong", which is to r
 > ~60% of stream processing is spent doing mundane transformation tasks like format unification for ML workloads, filtering for privacy, simple enrichments like geo-ip translations, etc. Yet the baseline complexity to stand up something “simple” often involves 3 or 4 distributed systems, multiple nights reading configurations and man-pages, and a few too many shots of espresso to start seeing the future. And once you are done, you end up ping-ponging the data back and forth between storage and compute, when all you had to do was to remove a field out of a JSON object. To the data engineer, it feels like an endless game of system whack-a-mole just to start to do the interesting work of actually understanding the data.
 > From [Vectorized article](https://vectorized.io/blog/wasm-architecture/)
 
-The idea behind this project is to allows developers to create easily customizable Message Queue pipelines using Web Assembly to transform/filter data. On top of that, also given access to some services, initially we are gonna support a cache service.
+The idea behind this project is to allows developers to create easily customizable Message Queue pipelines using Web Assembly to transform/filter data. On top of that, also given access to some services, like Logs, Cache and routing to message queues.
+
+![Architecture](./.images/architecture.png)
 
 ## Build/Install
 
