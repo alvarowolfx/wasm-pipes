@@ -7,7 +7,7 @@ Uses cache service.
 ### HTTP Entry point pipeline
 
 ```
-> SOURCE_URI=http://:9000/events SINK_URI=https://xyz.m.pipedream.net WASM_ENABLED=true WASM_BLOB_URI=file://./wasm/assemblyscript/examples/dedup-name wasm-pipe
+> SOURCE_URI=http://:9000/events SINK_URI=https://en8yxip63l4e8yv.m.pipedream.net WASM_ENABLED=true WASM_BLOB_URI=file://./wasm/assemblyscript/examples/dedup-name wasm-pipes
 ```
 
 ### Sending events

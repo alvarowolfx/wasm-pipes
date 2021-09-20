@@ -5,7 +5,7 @@
 ### HTTP Entry point pipeline
 
 ```
-> SOURCE_URI=http://:9000/events SINK_URI=https://xyz.m.pipedream.net WASM_ENABLED=true WASM_BLOB_URI=file://./wasm/assemblyscript/examples/uppercase wasm-pipe
+> SOURCE_URI=http://:9000/events SINK_URI=https://xyz.m.pipedream.net WASM_ENABLED=true WASM_BLOB_URI=file://./wasm/assemblyscript/examples/uppercase wasm-pipes
 ```
 
 ### Sending events

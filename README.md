@@ -13,6 +13,8 @@ The idea behind this project is to allows developers to create easily customizab
 
 ![Architecture](./.images/architecture.png)
 
+[Demo Video](https://www.loom.com/share/e60d4850342145818b3606a324c38643)
+
 ## Build/Install
 
 You need go installed to build this project.

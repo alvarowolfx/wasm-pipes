@@ -28,7 +28,7 @@ To test the pipeline, you can run `curl` to send data to the source:
 To make sure the pipeline is working, we can create a loop with another isntance of `wasm-pipes`:
 
 ```
-> SOURCE_URI=nats://sink?pipe=queue NATS_SERVER_URL=0.0.0.0:4222 SINK_URI=http://localhost:9000/events  wasm-pipes
+> SOURCE_URI=nats://sink?queue=pipe NATS_SERVER_URL=0.0.0.0:4222 SINK_URI=http://localhost:9000/events  wasm-pipes
 2021/09/18 14:39:05  info wasm-pipes started
 ```
 

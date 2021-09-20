@@ -24,9 +24,9 @@
 
 ```
 # Generate hot storage event
-> curl -X POST http://localhost:9000/events -d '{ "temp" : 45.0 }' -H "Content-Type: application/json
+> curl -X POST http://localhost:9000/events -d '{ "temp" : 45.0 }' -H "Content-Type: application/json"
 # No event triggered
-> curl -X POST http://localhost:9000/events -d '{ "temp" : 30.0 }' -H "Content-Type: application/json
+> curl -X POST http://localhost:9000/events -d '{ "temp" : 30.0 }' -H "Content-Type: application/json"
 # Generate cold storage event
-> curl -X POST http://localhost:9000/events -d '{ "temp" : 15.0 }' -H "Content-Type: application/json
+> curl -X POST http://localhost:9000/events -d '{ "temp" : 15.0 }' -H "Content-Type: application/json"
 ```
